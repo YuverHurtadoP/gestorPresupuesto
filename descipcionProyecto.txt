@@ -1,0 +1,136 @@
+
+Proyecto: Sistema de Administración de Gastos y Presupuestos
+
+Tecnologías requeridas:
+- Frontend: Angular
+- Backend: Node.js
+- Base de datos: MongoDB (ODM: Mongoose)
+
+El objetivo del proyecto es desarrollar una aplicación web que permita a los usuarios administrar sus cuentas, presupuestos y gastos, con validaciones, persistencia en la base de datos y una interfaz amigable.
+
+-------------------------------------------------------------
+HU1 - Creación de cuenta
+El sistema debe permitir la creación de cuentas de usuario.
+
+Campos obligatorios:
+1. Correo electrónico
+2. Contraseña
+3. Nombre completo
+
+Notas:
+- Todos los campos deben ser obligatorios.
+- Se deben implementar validaciones con mensajes de error claros indicando cuando un campo es requerido o inválido.
+
+-------------------------------------------------------------
+HU2 - Inicio de sesión
+El sistema debe permitir que un usuario registrado inicie sesión.
+
+Campos obligatorios:
+1. Correo electrónico
+2. Contraseña
+
+Notas:
+- Validar que ambos campos sean obligatorios.
+- Mostrar mensajes de error adecuados cuando falten datos o sean incorrectos.
+
+-------------------------------------------------------------
+HU3 - Edición de cuenta
+El usuario autenticado debe poder editar su información personal.
+
+Campos editables:
+- Nombre completo
+- Contraseña
+- Correo electrónico (validar que el nuevo correo no exista previamente en la BD)
+
+Notas:
+- Se debe verificar que el correo electrónico actualizado sea único.
+- Mantener validaciones de campos obligatorios.
+
+-------------------------------------------------------------
+HU4 - Registro de presupuesto
+El usuario debe poder registrar presupuestos (ejemplo: “Vacaciones”).
+
+Campos:
+1. Nombre del presupuesto (obligatorio)
+2. Descripción (opcional)
+3. Valor del presupuesto (obligatorio)
+
+-------------------------------------------------------------
+HU5 - Listado de presupuestos
+El usuario autenticado debe poder consultar todos los presupuestos que ha registrado en la base de datos.
+
+-------------------------------------------------------------
+HU6 - Edición de presupuesto
+El usuario autenticado debe poder modificar un presupuesto existente.
+
+Campos editables:
+1. Nombre del presupuesto (opcional)
+2. Descripción (opcional)
+3. Valor del presupuesto (obligatorio)
+
+
+-------------------------------------------------------------
+HU7 - Eliminar  presupuesto
+El usuario autenticado debe poder eliminar un presupuesto existente.
+
+ 
+
+
+-------------------------------------------------------------
+HU8 - Registro de gastos
+El usuario debe poder registrar gastos asociados a un presupuesto (ejemplo: en “Vacaciones”, gastos como hotel, transporte, comida, etc.).
+
+Campos:
+1. Nombre del gasto (obligatorio)
+2. Descripción (opcional)
+3. Valor del gasto (obligatorio)
+
+-------------------------------------------------------------
+HU9 - Listado de gastos
+El usuario autenticado debe poder ver los gastos registrados asociados a un presupuesto específico.
+
+-------------------------------------------------------------
+HU10 - Edición de gastos
+El usuario autenticado debe poder editar un gasto previamente registrado en un presupuesto.
+
+Campos editables:
+1. Nombre del gasto (opcional)
+2. Descripción (opcional)
+3. Valor del gasto (obligatorio)
+
+
+
+
+
+
+-------------------------------
+
+generacion del proyecto: npm init -y
+npm install express mongoose dotenv cors bcryptjs jsonwebtoken
+npm install --save-dev typescript ts-node-dev @types/node @types/express @types/cors @types/bcryptjs @types/jsonwebtoken
+
+
+comandos para trabajar como typeScrit
+
+npx tsc --init
+
+
+
+
+
+Notas finales y mejoras recomendadas
+
+Añade validaciones adicionales (p.ej. valor > 0) y manejo de errores más detallado.
+
+Considera usar express-validator para validaciones de request.
+
+Añadir paginación y filtros en getBudgets / getExpensesByBudget.
+
+Añadir pruebas automáticas (jest / supertest) y control de logs.
+
+Considera separar los DTOs / interfaces para mantener limpieza.
+
+
+
+npm install @angular/material @angular/flex-layout ngx-toastr
+
