@@ -1,0 +1,15 @@
+# Ignorar archivos temporales
+*.log
+*.tmp
+
+# Ignorar directorios
+node_modules/
+dist/
+
+# Ignorar archivos específicos
+secret.txt
+config/local.env
+
+# Ignorar todos los archivos .env excepto .env.example
+#.env
+!.env.example
