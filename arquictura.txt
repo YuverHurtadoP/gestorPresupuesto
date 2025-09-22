@@ -1,0 +1,36 @@
+backend/
+│── src/
+│   ├── application/          # Casos de uso (reglas de negocio)
+│   │   ├── user/             # Casos de uso de usuario
+│   │   │   └── changePasswordUseCase.ts
+│   │   └── expense/
+│   │       └── createExpenseUseCase.ts
+│   │
+│   ├── domain/               # Entidades del dominio (POJOs)
+│   │   ├── User.ts
+│   │   ├── Expense.ts
+│   │   └── Budget.ts
+│   │
+│   ├── infrastructure/       # Adaptadores externos
+│   │   ├── db/               # Conexión a BD (Mongoose, Prisma, etc.)
+│   │   │   └── mongooseConnection.ts
+│   │   ├── models/           # Modelos específicos de Mongoose
+│   │   │   ├── UserModel.ts
+│   │   │   └── ExpenseModel.ts
+│   │   ├── repositories/     # Implementaciones de repositorios
+│   │   │   ├── UserRepositoryMongo.ts
+│   │   │   └── ExpenseRepositoryMongo.ts
+│   │   ├── routes/           # Definición de rutas Express
+│   │   │   ├── userRoutes.ts
+│   │   │   └── expenseRoutes.ts
+│   │   └── server.ts         # Configuración de Express
+│   │
+│   ├── interfaces/           # Adaptadores de entrada (controladores)
+│   │   ├── userController.ts
+│   │   └── expenseController.ts
+│   │
+│   └── index.ts              # Punto de entrada
+│
+├── package.json
+├── tsconfig.json
+└── .env
