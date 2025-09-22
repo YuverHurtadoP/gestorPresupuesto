@@ -98,3 +98,41 @@ export const updateUser = async (req: Request & { userId?: string }, res: Respon
     res.status(500).json({ message: "Error en el servidor", error });
   }
 };
+
+export const changePassword = async (
+  req: Request & { userId?: string },
+  res: Response
+): Promise<void> => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      res.status(400).json({ message: "Debe enviar la contraseña actual y la nueva" });
+      return;
+    }
+
+    // Buscar el usuario logueado
+    const user = await User.findById(req.userId);
+    if (!user) {
+      res.status(404).json({ message: "Usuario no encontrado" });
+      return;
+    }
+
+    // Verificar que la contraseña actual coincida
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      res.status(400).json({ message: "La contraseña actual es incorrecta" });
+      return;
+    }
+
+    // Encriptar la nueva contraseña
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+
+    res.json({ message: "Contraseña actualizada correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor", error });
+  }
+};

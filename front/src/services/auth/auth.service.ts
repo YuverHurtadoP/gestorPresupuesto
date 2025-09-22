@@ -22,4 +22,10 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/login`, credentials);
   }
+
+changePassword(data: { currentPassword: string; newPassword: string }) {
+  return this.http.put(`${this.apiUrl}/auth/change-password`, data,  );
+}
+
+
 }

@@ -115,7 +115,7 @@
         class="absolute right-0 mt-2 w-52 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
       >
         <ul class="py-2">
-          <li>
+          <!--<li>
             <a
               href="#"
               class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50"
@@ -124,12 +124,12 @@
               <span class="text-purple-600">✏</span>
               <span>Editar perfil</span>
             </a>
-          </li>
+          </li>-->
           <li>
             <a
-              href="#"
+
               class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50"
-              (click)="closeDropdown()"
+             (click)="openPasswordModal()"
             >
               <span class="text-orange-500">🔑</span>
               <span>Cambiar clave</span>
@@ -137,7 +137,7 @@
           </li>
           <li>
             <a
-              href="#"
+
               class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50 text-red-600"
               (click)="logout()"
             >
@@ -153,3 +153,9 @@
 
 <!-- Aquí sigue el contenido -->
 <router-outlet></router-outlet>
+
+
+<app-change-password
+  [visible]="modalPasswordOpen"
+  (close)="modalPasswordOpen = false"
+></app-change-password>
