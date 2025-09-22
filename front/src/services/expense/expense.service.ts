@@ -33,18 +33,22 @@ export class ExpenseService {
     );
   }
 
-   createExpense(expense: ExpenseDto): Observable<{ message: string; expense: ExpenseDto }> {
-      return this.http.post<{ message: string; expense: ExpenseDto }>(
-        `${this.apiUrl}/create`,
-        expense
-      );
-    }
+  createExpense(expense: ExpenseDto): Observable<{ message: string; expense: ExpenseDto }> {
+    return this.http.post<{ message: string; expense: ExpenseDto }>(
+      `${this.apiUrl}/create`,
+      expense
+    );
+  }
 
-    updateExpense(id: string, expense: any): Observable<any> {
+  updateExpense(id: string, expense: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, expense);
   }
 
-   deleteExpense(id: string): Observable<any> {
+  deleteExpense(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getSummaryByBudget(presupuestoId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${presupuestoId}/summary`);
   }
 }

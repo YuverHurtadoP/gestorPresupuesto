@@ -9,16 +9,21 @@ import { PaginationComponent } from '../../common/pagination/pagination.componen
 import { FormComponent } from '../../budgets/form/form.component';
 import { Notyf } from 'notyf';
 import Swal from 'sweetalert2';
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, ListCommonComponent, PaginationComponent, FormComponent],
+  imports: [
+    CommonModule,
+    ListCommonComponent,
+    PaginationComponent,
+    FormComponent,
+  ],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrl: './list.component.css',
 })
 export class ListComponent implements OnInit {
-
   expenses: any[] = [];
   expenseWithBudget!: ExpenseDto;
   total = 0;
@@ -28,77 +33,101 @@ export class ListComponent implements OnInit {
   search = signal('');
   presupuestoId = '';
   idExpense = '';
+  resumen: any;
+  porcentaje: number = 0;
+
+  doughnutData!: ChartData<'doughnut'>;
+  detalleData!: ChartData<'pie'>;
 
   modalVisible = false;
   modalMode: 'create' | 'edit' | 'view' = 'create';
   selectedExpense: any = null;
-  private notyf = new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
-
+  private notyf = new Notyf({
+    duration: 3000,
+    position: { x: 'right', y: 'top' },
+  });
 
   acciones = [
-    { key: 'detalle', label: 'Ver detalle', icon: '👁', color: 'text-purple-600', visible: true },
-    { key: 'editar', label: 'Editar', icon: '✏', color: 'text-blue-600', visible: true },
-    { key: 'eliminar', label: 'Eliminar', icon: '🗑', color: 'text-red-600', visible: true },
-
+    {
+      key: 'detalle',
+      label: 'Ver detalle',
+      icon: '👁',
+      color: 'text-purple-600',
+      visible: true,
+    },
+    {
+      key: 'editar',
+      label: 'Editar',
+      icon: '✏',
+      color: 'text-blue-600',
+      visible: true,
+    },
+    {
+      key: 'eliminar',
+      label: 'Eliminar',
+      icon: '🗑',
+      color: 'text-red-600',
+      visible: true,
+    },
   ];
 
-  constructor(private expenseService: ExpenseService, private router: Router, private route: ActivatedRoute) { }
-
+  constructor(
+    private expenseService: ExpenseService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-
     this.presupuestoId = this.route.snapshot.paramMap.get('id') || '';
-    this.loadExpenses()
+    this.loadExpenses();
+
+
 
   }
-
-  loadExpenses(): void {
+  grafica() {
     this.expenseService
-      .getExpense(
-        this.presupuestoId,
-        this.page, this.limit
-
-      )
-      .subscribe((res) => {
-        this.expenses = res.expenses;
-        this.total = res.total;
-        this.totalPages = Math.ceil(this.total / this.limit);
+      .getSummaryByBudget(this.presupuestoId)
+      .subscribe((summary) => {
+        this.resumen = summary;
+        this.porcentaje = summary.porcentaje
 
       });
   }
 
+  loadExpenses(): void {
+    this.expenseService
+      .getExpense(this.presupuestoId, this.page, this.limit)
+      .subscribe((res) => {
+        this.expenses = res.expenses;
+        this.total = res.total;
+        this.totalPages = Math.ceil(this.total / this.limit);
+         this.grafica()
+      });
+  }
 
-
-  handleAction(event: { key: string, item: any }) {
-
-     this.idExpense = event.item._id;
-
+  handleAction(event: { key: string; item: any }) {
+    this.idExpense = event.item._id;
 
     if (event.key === 'detalle') {
       this.openModal('view', event.item);
     } else if (event.key === 'editar') {
       this.openModal('edit', event.item);
-
-    }
-    else if (event.key === 'eliminar') {
-          Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No podrás revertir esto",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.deleteExpense();
-
-            }
-          });
+    } else if (event.key === 'eliminar') {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'No podrás revertir esto',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteExpense();
         }
-
-
+      });
+    }
   }
 
   onPageChange(newPage: number) {
@@ -112,29 +141,22 @@ export class ListComponent implements OnInit {
     this.modalVisible = true;
   }
 
-
   closeModal() {
     this.modalVisible = false;
     this.selectedExpense = null;
   }
 
-
   saveExpense(expense: any) {
-
     this.expenses = expense;
 
     this.expenseWithBudget = {
       ...expense,
-      presupuestoId: this.presupuestoId
+      presupuestoId: this.presupuestoId,
     };
     if (this.modalMode === 'create') {
-
       this.createExpense();
-
     } else if (this.modalMode === 'edit') {
-
-
-       this.updateExpense();
+      this.updateExpense();
     }
     this.closeModal();
   }
@@ -147,28 +169,35 @@ export class ListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error creando gasto', err);
-        this.notyf.error('Error creando presupuesto.');
-      }
+        this.notyf.error(
+          err.error.message +
+          '. El presupuesto disponible es:' +
+          err.error.disponible
+        );
+      },
     });
   }
 
-    updateExpense() {
-
+  updateExpense() {
     if (!this.idExpense) return;
 
     this.expenseService.updateExpense(this.idExpense, this.expenses).subscribe({
       next: (res) => {
         this.notyf.success('Gasto actualizado exitosamente');
-         this.loadExpenses();
+        this.loadExpenses();
       },
       error: (err) => {
         console.error('Error actualizando presupuesto', err);
-        this.notyf.error(err.error.message + '. El presupuesto disponible es:'+err.error.disponible);
-      }
+        this.notyf.error(
+          err.error.message +
+          '. El presupuesto disponible es:' +
+          err.error.disponible
+        );
+      },
     });
   }
 
-    deleteExpense() {
+  deleteExpense() {
     this.expenseService.deleteExpense(this.idExpense).subscribe({
       next: (res) => {
         this.notyf.success('Gasto eliminado exitosamente');
@@ -177,8 +206,7 @@ export class ListComponent implements OnInit {
       error: (err) => {
         console.error('Error eliminando gasto', err);
         this.notyf.error('Error eliminando presupuesto.');
-      }
+      },
     });
   }
-
 }

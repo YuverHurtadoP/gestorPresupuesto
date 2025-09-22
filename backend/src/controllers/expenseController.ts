@@ -171,3 +171,57 @@ export const deleteExpense = async (req: Request & { userId?: string }, res: Res
     res.status(500).json({ message: "Error al eliminar el gasto", error });
   }
 };
+
+export const getExpensesSummaryByBudget = async (
+  req: Request & { userId?: string },
+  res: Response
+): Promise<void> => {   // <--- aquí
+  try {
+    const { presupuestoId } = req.params;
+
+    const budget = await Budget.findOne({ _id: presupuestoId, user: req.userId });
+    if (!budget) {
+      res.status(404).json({ message: "Presupuesto no encontrado o no autorizado" });
+      return;
+    }
+
+    const expenses = await Expense.find({ presupuesto: presupuestoId, user: req.userId });
+
+    if (!expenses.length) {
+      res.status(200).json({
+        presupuesto: budget.valor,
+        gastado: 0,
+        disponible: budget.valor,
+        porcentaje: 0,
+        detalle: []
+      });
+      return;
+    }
+
+    const gastado = expenses.reduce((sum, g) => sum + g.valor, 0);
+    const disponible = budget.valor - gastado;
+    const porcentaje = budget.valor > 0 ? (gastado / budget.valor) * 100 : 0;
+
+    const agrupados = expenses.reduce((acc: any, g) => {
+      acc[g.nombre] = (acc[g.nombre] || 0) + g.valor;
+      return acc;
+    }, {});
+
+    const detalle = Object.keys(agrupados).map(nombre => ({
+      nombre,
+      total: agrupados[nombre],
+      porcentaje: Number(((agrupados[nombre] / gastado) * 100).toFixed(2))
+    }));
+
+    res.status(200).json({
+      presupuesto: budget.valor,
+      gastado,
+      disponible,
+      porcentaje: Number(porcentaje.toFixed(2)),
+      detalle
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener resumen de gastos", error });
+  }
+};

@@ -1,0 +1,19 @@
+.donut {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: conic-gradient(#f97316 14%, #e5e7eb 0);
+  position: relative;
+}
+
+.donut::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
