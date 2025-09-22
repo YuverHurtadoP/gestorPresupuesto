@@ -5,7 +5,8 @@ import { AuthLayoutComponent } from '../components/auth/auth-layout/auth-layout.
 import { RegisterComponent } from '../components/auth/register/register.component';
 import { HeaderComponent } from '../components/common/header/header.component';
 import { ListComponent } from '../components/budgets/list/list.component';
-/*
+import { ListComponent as expenseListComponents } from '../components/expense/list/list.component';
+
 const canActivateDashboard = () => {
   const isLoggedIn = localStorage.getItem('token'); // o un servicio de auth real
   const router = inject(Router);
@@ -15,7 +16,7 @@ const canActivateDashboard = () => {
     return false;
   }
   return true;
-};*/
+};
 export const routes: Routes = [
   {
     path: '',
@@ -36,9 +37,10 @@ export const routes: Routes = [
 
     {
     path: 'crashflow',
-    component: HeaderComponent,
+    component: HeaderComponent,canActivate: [canActivateDashboard],
     children: [
-      { path: 'budget/list', component: ListComponent },
+      { path: 'budget/list', component: ListComponent},
+      { path: 'expense/list/:id', component: expenseListComponents},
 
     ],
   },

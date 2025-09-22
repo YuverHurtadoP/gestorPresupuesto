@@ -53,7 +53,10 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       { expiresIn: "1d" }
     );
 
-    res.json({ message: "Login exitoso", token, user });
+    // Crear un objeto sin el password
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    res.json({ message: "Login exitoso", token, user: userWithoutPassword });
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor", error });
   }

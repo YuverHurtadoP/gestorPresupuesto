@@ -1,103 +1,155 @@
-<header  class="relative flex items-center justify-between
-               bg-white text-gray-800 px-6 py-3 shadow-md">
-
+<header
+  class="relative flex items-center justify-between bg-white text-gray-800 px-6 py-3 shadow-md"
+>
   <!-- Logo -->
   <div class="flex items-center space-x-3">
-    <button class="p-2 focus:outline-none hover:scale-110 transition-transform duration-200 text-purple-600">
-      <svg xmlns="http://www.w3.org/2000/svg"
-           fill="none"
-           viewBox="0 0 24 24"
-           stroke-width="1.5"
-           stroke="currentColor"
-           class="w-7 h-7">
-        <path stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 6v12m-6-6h12" />
-        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+    <button
+      class="p-2 focus:outline-none hover:scale-110 transition-transform duration-200 text-purple-600"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-7 h-7"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 6v12m-6-6h12"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          stroke-width="1.5"
+        />
       </svg>
     </button>
     <span class="text-xl font-bold">
-      <span class="text-purple-600">Cash</span><span class="text-orange-500">Flow</span>
+      <span class="text-purple-600">Cash</span
+      ><span class="text-orange-500">Flow</span>
     </span>
   </div>
 
   <!-- Decoración centro -->
-  <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" class="w-80 h-20 opacity-60">
-      <path d="M10,30 Q150,10 300,30 T500,30" stroke="#ec4899" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M10,60 Q150,80 300,60 T500,60" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <circle cx="80" cy="20" r="10" fill="#ec4899"/>
-      <circle cx="250" cy="70" r="12" fill="#f59e0b"/>
-      <circle cx="420" cy="40" r="8" fill="#8b5cf6"/>
+  <div
+    class="absolute inset-0 flex justify-center items-center pointer-events-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 100"
+      class="w-80 h-20 opacity-60"
+    >
+      <path
+        d="M10,30 Q150,10 300,30 T500,30"
+        stroke="#ec4899"
+        stroke-width="4"
+        fill="none"
+        stroke-linecap="round"
+      />
+      <path
+        d="M10,60 Q150,80 300,60 T500,60"
+        stroke="#f59e0b"
+        stroke-width="5"
+        fill="none"
+        stroke-linecap="round"
+      />
+      <circle cx="80" cy="20" r="10" fill="#ec4899" />
+      <circle cx="250" cy="70" r="12" fill="#f59e0b" />
+      <circle cx="420" cy="40" r="8" fill="#8b5cf6" />
     </svg>
   </div>
 
   <!-- Iconos + Usuario -->
   <div class="flex items-center space-x-6">
     <!-- Notificación -->
-    <button class="relative hover:scale-110 transition-transform duration-200 text-fuchsia-500">
-      <svg xmlns="http://www.w3.org/2000/svg"
-           class="h-6 w-6"
-           fill="none" viewBox="0 0 24 24"
-           stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M15 17h5l-1.405-1.405A2.032 2.032 0
+    <button
+      class="relative hover:scale-110 transition-transform duration-200 text-fuchsia-500"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 17h5l-1.405-1.405A2.032 2.032 0
                  0118 14V11a6.002 6.002 0 00-4-5.659V5a2
                  2 0 10-4 0v.341C8.67 6.165 8 7.388
-                 8 8.75V14c0 .414-.162.816-.45 1.11L6 17h5" />
+                 8 8.75V14c0 .414-.162.816-.45 1.11L6 17h5"
+        />
       </svg>
-      <span class="absolute top-0 right-0 block w-2.5 h-2.5
-                   bg-orange-500 rounded-full ring-2 ring-white"></span>
+      <span
+        class="absolute top-0 right-0 block w-2.5 h-2.5 bg-orange-500 rounded-full ring-2 ring-white"
+      ></span>
     </button>
 
-<!-- Usuario -->
-<div class="relative group">
-  <div class="flex items-center space-x-2 cursor-pointer">
-    <img src="https://i.pravatar.cc/40"
-         alt="user"
-         class="w-9 h-9 rounded-full ring-2 ring-purple-400 hover:ring-4 transition-all duration-300" />
-    <div class="hidden sm:block">
-      <p class="text-sm font-semibold text-gray-800">Juan Pérez</p>
-      <p class="text-xs text-gray-500 italic">Administrador</p>
+    <!-- Usuario -->
+
+    <div class="relative">
+      <div
+        (click)="toggleDropdown()"
+        class="flex items-center space-x-2 cursor-pointer"
+      >
+        <img
+          src="https://i.pravatar.cc/40"
+          alt="user"
+          class="w-9 h-9 rounded-full ring-2 ring-purple-400 hover:ring-4 transition-all duration-300"
+        />
+        <div class="hidden sm:block">
+          <p class="text-sm font-semibold text-gray-800">{{nombreUsuario}}</p>
+          <p class="text-xs text-gray-500 italic">{{email}}</p>
+        </div>
+      </div>
+
+      <!-- Dropdown -->
+      <div
+        *ngIf="dropdownOpen"
+        class="absolute right-0 mt-2 w-52 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
+      >
+        <ul class="py-2">
+          <li>
+            <a
+              href="#"
+              class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50"
+              (click)="closeDropdown()"
+            >
+              <span class="text-purple-600">✏</span>
+              <span>Editar perfil</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50"
+              (click)="closeDropdown()"
+            >
+              <span class="text-orange-500">🔑</span>
+              <span>Cambiar clave</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50 text-red-600"
+              (click)="logout()"
+            >
+              <span>🚪</span>
+              <span>Cerrar sesión</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-
-  <!-- Dropdown -->
-  <div class="absolute right-0 mt-2 w-52 bg-white border border-gray-200
-              rounded-lg shadow-xl opacity-0 group-hover:opacity-100
-              pointer-events-none group-hover:pointer-events-auto
-              transform scale-95 group-hover:scale-100
-              transition-all duration-300 z-50">
-    <ul class="py-2">
-      <li>
-        <a href="#"
-           class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50">
-          <span class="text-purple-600">✏</span>
-          <span>Editar perfil</span>
-        </a>
-      </li>
-      <li>
-        <a href="#"
-           class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50">
-          <span class="text-orange-500">🔑</span>
-          <span>Cambiar clave</span>
-        </a>
-      </li>
-      <li>
-        <a href="#"
-           class="flex items-center space-x-2 px-4 py-2 hover:bg-purple-50 text-red-600">
-          <span>🚪</span>
-          <span>Cerrar sesión</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-
   </div>
 </header>
 
 <!-- Aquí sigue el contenido -->
 <router-outlet></router-outlet>
-

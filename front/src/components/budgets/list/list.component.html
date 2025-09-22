@@ -17,7 +17,13 @@
     </div>
 
     <!-- Tabla reutilizable -->
-    <app-list-common [data]="presupuestos" [actions]="acciones" (action)="handleAction($event)">
+    <app-list-common
+      [clickableName]="true"
+      nameRouteKey="link"
+      [data]="presupuestos"
+      [actions]="acciones"
+      (action)="handleAction($event)"
+    >
     </app-list-common>
 
     <!-- 🔹 Paginación -->

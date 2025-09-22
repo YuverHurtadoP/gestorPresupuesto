@@ -45,6 +45,7 @@ export class LoginComponent {
 
         // Guardar token en localStorage (opcional, depende de tu backend)
         localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
 
 
        this.router.navigate(['/crashflow/budget/list']);

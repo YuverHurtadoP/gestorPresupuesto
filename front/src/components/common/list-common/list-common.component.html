@@ -1,36 +1,68 @@
 <div class="p-6">
   <div class="bg-white rounded-lg shadow-md divide-y divide-gray-200">
-    <div *ngFor="let item of data; let i = index" class="relative p-4 flex justify-between items-center">
-
+    <div
+      *ngFor="let item of data; let i = index"
+      class="relative p-4 flex justify-between items-center"
+    >
       <!-- Columna izquierda -->
       <div>
-        <h3 class="text-lg font-semibold text-gray-800">{{ item.nombre }}</h3>
-        <p class="text-orange-600 font-bold">{{ item.valor }}</p>
-        <p class="text-xs text-gray-500">Última actualización: {{ item.updatedAt }}</p>
+        <h3 class="text-lg font-semibold text-gray-800">
+          <span
+            *ngIf="clickableName; else plainName"
+            class="text-purple-800 cursor-pointer hover:underline"
+            (click)="goToRoute(item)"
+          >
+            {{ item.nombre }}
+          </span>
+          <ng-template #plainName>
+            {{ item.nombre }}
+          </ng-template>
+        </h3>
+        <p class="text-orange-600 font-bold">$  {{ item.valor | number:'1.0-2' }}</p>
+        <p class="text-xs text-gray-500">
+          Última actualización: {{ item.updatedAt | date:'dd/MM/yyyy' }}
+        </p>
       </div>
 
       <!-- Menú de acciones -->
       <div class="relative">
-        <button (click)="toggleMenu(i)" class="p-2 rounded-full hover:bg-gray-100">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-               viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-               class="w-5 h-5 text-gray-500">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm6.75 0a.75.75 0
+        <button
+          (click)="toggleMenu(i)"
+          class="p-2 rounded-full hover:bg-gray-100"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5 text-gray-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm6.75 0a.75.75 0
                   11-1.5 0 .75.75 0 011.5 0zm6.75 0a.75.75 0
-                  11-1.5 0 .75.75 0 011.5 0z" />
+                  11-1.5 0 .75.75 0 011.5 0z"
+            />
           </svg>
         </button>
 
         <!-- Dropdown -->
-        <div *ngIf="openMenuIndex === i"
-             class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-10">
+        <div
+          *ngIf="openMenuIndex === i"
+          class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-10"
+        >
           <ul class="py-2">
-            <li *ngFor="let actionOption of actions"
-                [class.hidden]="!actionOption.visible">
-              <button (click)="onAction(actionOption.key, item)"
-                      class="flex items-center space-x-2 w-full text-left px-4 py-2 hover:bg-purple-50"
-                      [ngClass]="actionOption.color || 'text-gray-700'">
+            <li
+              *ngFor="let actionOption of actions"
+              [class.hidden]="!actionOption.visible"
+            >
+              <button
+                (click)="onAction(actionOption.key, item)"
+                class="flex items-center space-x-2 w-full text-left px-4 py-2 hover:bg-purple-50"
+                [ngClass]="actionOption.color || 'text-gray-700'"
+              >
                 <span>{{ actionOption.icon }}</span>
                 <span>{{ actionOption.label }}</span>
               </button>
