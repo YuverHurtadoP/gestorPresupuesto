@@ -6,7 +6,13 @@
     <!-- Encabezado -->
     <div class="flex justify-between items-center border-b pb-3 mb-4">
       <h2 class="text-xl font-bold text-purple-800">
-        {{ mode === 'create' ? 'Crear Presupuesto' : mode === 'edit' ? 'Editar Presupuesto' : 'Ver Presupuesto' }}
+        {{
+          mode === 'create'
+            ? (entity === 'budget' ? 'Crear Presupuesto' : 'Crear Gasto')
+            : mode === 'edit'
+              ? (entity === 'budget' ? 'Editar Presupuesto' : 'Editar Gasto')
+              : (entity === 'budget' ? 'Ver Presupuesto' : 'Ver Gasto')
+        }}
       </h2>
       <button (click)="onClose()" class="text-gray-500 hover:text-gray-700">✖</button>
     </div>
@@ -21,33 +27,41 @@
           formControlName="nombre"
           class="w-full border rounded p-2"
           [class.border-red-500]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+          [readonly]="mode === 'view'"
         />
         <p *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched" class="text-red-500 text-sm">
           El nombre es obligatorio.
         </p>
       </div>
 
-      <!-- Monto -->
+      <!-- Valor -->
       <div>
-        <label class="block text-sm font-medium text-gray-700">Monto</label>
+        <label class="block text-sm font-medium text-gray-700">
+          {{ entity === 'budget' ? 'Monto del presupuesto' : 'Valor del gasto' }}
+        </label>
         <input
           type="number"
           formControlName="valor"
           class="w-full border rounded p-2"
           [class.border-red-500]="form.get('valor')?.invalid && form.get('valor')?.touched"
+          [readonly]="mode === 'view'"
         />
         <p *ngIf="form.get('valor')?.hasError('required') && form.get('valor')?.touched" class="text-red-500 text-sm">
-          El monto es obligatorio.
+          El valor es obligatorio.
         </p>
         <p *ngIf="form.get('valor')?.hasError('min') && form.get('valor')?.touched" class="text-red-500 text-sm">
-          El monto debe ser mayor a 0.
+          Debe ser mayor a 0.
         </p>
       </div>
 
       <!-- Descripción -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Descripción</label>
-        <textarea formControlName="descripcion" class="w-full border rounded p-2"></textarea>
+        <textarea
+          formControlName="descripcion"
+          class="w-full border rounded p-2"
+          [readonly]="mode === 'view'"
+        ></textarea>
       </div>
 
       <!-- Botones -->

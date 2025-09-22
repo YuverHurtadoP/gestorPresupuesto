@@ -140,3 +140,34 @@ export const getExpensesByBudget = async (
     res.status(500).json({ message: "Error al obtener los gastos", error });
   }
 };
+
+// HU11 - Eliminar gasto con validación de presupuesto
+export const deleteExpense = async (req: Request & { userId?: string }, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    // Buscar gasto
+    const expense = await Expense.findOne({ _id: id, user: req.userId });
+    if (!expense) {
+      res.status(404).json({ message: "Gasto no encontrado o no autorizado" });
+      return;
+    }
+
+    // Verificar presupuesto asociado
+    const budget = await Budget.findOne({ _id: expense.presupuesto, user: req.userId });
+    if (!budget) {
+      res.status(404).json({ message: "Presupuesto no encontrado o no autorizado" });
+      return;
+    }
+
+    // Eliminar el gasto
+    await expense.deleteOne();
+
+    res.status(200).json({
+      message: "Gasto eliminado correctamente",
+      expenseId: id
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar el gasto", error });
+  }
+};

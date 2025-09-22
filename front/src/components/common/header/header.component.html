@@ -3,7 +3,7 @@
 >
   <!-- Logo -->
   <div class="flex items-center space-x-3">
-    <button
+    <button (click)="home()"
       class="p-2 focus:outline-none hover:scale-110 transition-transform duration-200 text-purple-600"
     >
       <svg
@@ -28,7 +28,7 @@
         />
       </svg>
     </button>
-    <span class="text-xl font-bold">
+    <span class="text-xl font-bold" (click)="home()" style="cursor: pointer;">
       <span class="text-purple-600">Cash</span
       ><span class="text-orange-500">Flow</span>
     </span>

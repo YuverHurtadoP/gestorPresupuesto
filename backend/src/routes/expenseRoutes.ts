@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createExpense, getExpensesByBudget, updateExpense } from "../controllers/expenseController";
+import { createExpense, getExpensesByBudget, updateExpense, deleteExpense } from "../controllers/expenseController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 const router = Router();
@@ -8,9 +8,10 @@ const router = Router();
 router.post("/create", authMiddleware, createExpense);
 
 // Listar gastos por presupuesto
-router.get("/budget/:presupuestoId", authMiddleware, getExpensesByBudget);
+router.get("/:presupuestoId", authMiddleware, getExpensesByBudget);
 
 // Actualizar gasto
 router.put("/:id", authMiddleware, updateExpense);
 
+router.delete("/:id", authMiddleware, deleteExpense)
 export default router;

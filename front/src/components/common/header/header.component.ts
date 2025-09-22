@@ -42,4 +42,7 @@ closeDropdown() {
     // Redirige al login
     this.router.navigate(['/auth/login']);
   }
+  home(){
+       this.router.navigate(['/crashflow/budget/list']);
+  }
 }

@@ -11,8 +11,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 export class FormComponent implements OnChanges {
   @Input() visible = false;
   @Input() mode: 'create' | 'edit' | 'view' = 'create';
-  @Input() budgetData: any = null;
-
+  @Input() data: any = null;
+ @Input() entity: 'budget' | 'expense' = 'budget';
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
 
@@ -27,8 +27,8 @@ export class FormComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if (this.budgetData) {
-      this.form.patchValue(this.budgetData);
+    if (this.data) {
+      this.form.patchValue(this.data);
     }
 
     if (this.mode === 'view') {

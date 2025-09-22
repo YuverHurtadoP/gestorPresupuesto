@@ -1,13 +1,14 @@
 import { FormComponent } from './../form/form.component';
 import { Component, OnInit } from '@angular/core';
 import { ListCommonComponent } from '../../common/list-common/list-common.component';
-import { Budget, BudgetService } from '../../../services/budget/budget.service';
+import { BudgetService } from '../../../services/budget/budget.service';
 import { PaginationComponent } from '../../common/pagination/pagination.component';
 import Swal from 'sweetalert2';
 
 import { CommonModule } from '@angular/common';
 import { Notyf } from 'notyf';
 import { Router } from '@angular/router';
+import { Budget } from '../../../models/budget/budget';
 
 @Component({
   selector: 'app-list',

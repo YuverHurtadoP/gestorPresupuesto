@@ -2,24 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
+import { BudgetResponse, Budget } from '../../models/budget/budget';
 
 
-export interface BudgetResponse {
-  budgets: Budget[];
-  total: number;
-  page: number;
-  limit: number;
-}
-// src/app/models/budget.model.ts
-export interface Budget {
-  _id?: string;
-  nombre: string;
-  descripcion?: string;
-  valor: number;
-  user?: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+
 
 @Injectable({
   providedIn: 'root'

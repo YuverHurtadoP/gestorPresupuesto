@@ -51,7 +51,8 @@
     <app-form
       [visible]="modalVisible"
       [mode]="modalMode"
-      [budgetData]="selectedBudget"
+      [entity]="'budget'"
+      [data]="selectedBudget"
       (close)="closeModal()"
       (save)="saveBudget($event)"
     ></app-form>
