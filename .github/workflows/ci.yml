@@ -9,56 +9,13 @@ on:
 jobs:
   build-backend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backendCleanArquitecture
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Trae todos los archivos
-
-      - name: Ensure backend folder is not empty
-        run: |
-          if [ ! -f placeholder.txt ]; then
-            echo "Placeholder file to ensure folder exists" > placeholder.txt
-          fi
-
-      - name: Debug backend folder
-        run: ls -la
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20.14.0
-
-      - name: Install dependencies
-        run: npm install --force
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build backend
-        run: npm run build
-
-  build-frontend:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: front
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Ensure frontend folder is not empty
-        run: |
-          if [ ! -f placeholder.txt ]; then
-            echo "Placeholder file to ensure folder exists" > placeholder.txt
-          fi
-
-      - name: Debug frontend folder
+      - name: Debug root folder
         run: ls -la
 
       - name: Setup Node.js
@@ -66,11 +23,48 @@ jobs:
         with:
           node-version: 20.14.0
 
-      - name: Install dependencies
-        run: npm install --force
+      - name: Install backend dependencies
+        run: |
+          cd backendCleanArquitecture
+          npm install --force
 
-      - name: Run tests
-        run: npm test --if-present
+      - name: Run backend tests
+        run: |
+          cd backendCleanArquitecture
+          npm test
+
+      - name: Build backend
+        run: |
+          cd backendCleanArquitecture
+          npm run build
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Debug root folder
+        run: ls -la
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.14.0
+
+      - name: Install frontend dependencies
+        run: |
+          cd front
+          npm install --force
+
+      - name: Run frontend tests
+        run: |
+          cd front
+          npm test --if-present
 
       - name: Build frontend
-        run: npm run build
+        run: |
+          cd front
+          npm run build
