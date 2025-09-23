@@ -15,8 +15,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug root folder
-        run: ls -la
+      - name: Ensure backend folder exists
+        run: |
+          if [ ! -d backendCleanArquitecture ]; then
+            mkdir backendCleanArquitecture
+          fi
+          # Agregar un archivo temporal para que npm funcione incluso si la carpeta está vacía
+          if [ ! -f backendCleanArquitecture/placeholder.txt ]; then
+            echo "Placeholder file to ensure folder exists" > backendCleanArquitecture/placeholder.txt
+          fi
+
+      - name: Debug backend folder
+        run: ls -la backendCleanArquitecture
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -46,8 +56,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug root folder
-        run: ls -la
+      - name: Ensure frontend folder exists
+        run: |
+          if [ ! -d front ]; then
+            mkdir front
+          fi
+          if [ ! -f front/placeholder.txt ]; then
+            echo "Placeholder file to ensure folder exists" > front/placeholder.txt
+          fi
+
+      - name: Debug frontend folder
+        run: ls -la front
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
