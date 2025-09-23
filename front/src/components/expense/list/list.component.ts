@@ -1,4 +1,3 @@
-import { updateExpense } from './../../../../../backend/src/controllers/expenseController';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
