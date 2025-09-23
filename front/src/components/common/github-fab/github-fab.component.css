@@ -1,0 +1,27 @@
+.github-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff; /* fondo blanco */
+  border: none; /* borde negro */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* sombra más notoria */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.github-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* más sombra en hover */
+}
+
+.github-fab img {
+  width: 30px;
+  height: 30px;
+  filter: invert(0); /* mantiene el logo en negro */
+}
