@@ -1,11 +1,11 @@
 
-import { User } from "../../domain/entities/User";
- import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { IUserRepository } from "../../domain/repositories/IUserRepositor";
+import { IUserRepository } from "../../../domain/repositories/IUserRepositor";
+import { User } from "../../../domain/entities/User";
 
 export class LoginUserUseCase {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(private userRepository: IUserRepository) { }
 
   async execute(email: string, password: string): Promise<{ token: string; user: User }> {
     const user = await this.userRepository.findByEmail(email);

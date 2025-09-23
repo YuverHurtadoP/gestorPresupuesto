@@ -37,7 +37,7 @@ export class RegisterComponent {
 
     const { name, email, password } = this.registerForm.value;
 
-    this.authService.register({ nombre: name!, email: email!, password: password! }).subscribe({
+    this.authService.register({ name: name!, email: email!, password: password! }).subscribe({
       next: (res) => {
         this.notyf.success('Usuario creado correctamente');
         console.log(res);

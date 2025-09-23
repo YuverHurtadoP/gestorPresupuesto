@@ -6,7 +6,7 @@ export interface   BudgetResponse {
 }
 
 export interface Budget {
-  _id?: string;
+  id?: string;
   nombre: string;
   descripcion?: string;
   valor: number;

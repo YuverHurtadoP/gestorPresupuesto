@@ -34,3 +34,57 @@ backend/
 ├── package.json
 ├── tsconfig.json
 └── .env
+
+// generalmente los dto van en la capa de aplicaicones
+
+// en spring bo los  son equivalente a lso casusos de uso de la capa de aplicaicones@Service
+
+* Explicación de capas */
+
+application/:
+
+Contiene los casos de uso de la aplicación.
+
+Cada caso de uso representa una operación del negocio, por ejemplo cambiar la contraseña o crear un gasto.
+
+Depende solo de las entidades del dominio.
+
+domain/:
+
+Contiene las entidades puras del dominio (POJOs).
+
+Representa el núcleo del negocio sin depender de frameworks o infraestructura.
+
+Ejemplos: User, Expense, Budget.
+
+infrastructure/:
+
+Contiene adaptadores de salida y detalles externos.
+
+db/: conexión a la base de datos.
+
+models/: modelos específicos de Mongoose.
+
+repositories/: implementación concreta de los repositorios definidos en el dominio o aplicación.
+
+routes/: definición de rutas HTTP (Express).
+
+server.ts: configuración del servidor Express.
+
+interfaces/:
+
+Contiene adaptadores de entrada (inbound adapters).
+
+Controladores que reciben solicitudes HTTP y llaman a los casos de uso.
+
+Aquí también podrían incluirse middlewares u otros adaptadores de entrada.
+
+index.ts:
+
+Punto de entrada de la aplicación.
+
+Inicializa el servidor, carga rutas y middlewares.
+
+package.json, tsconfig.json, .env:
+
+Configuración del proyecto, dependencias y variables de entorno.

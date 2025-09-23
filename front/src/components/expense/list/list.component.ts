@@ -89,7 +89,8 @@ export class ListComponent implements OnInit {
       .getSummaryByBudget(this.presupuestoId)
       .subscribe((summary) => {
         this.resumen = summary;
-        this.porcentaje = summary.porcentaje
+        this.porcentaje = summary?.summary?.porcentaje
+
 
       });
   }
@@ -106,7 +107,7 @@ export class ListComponent implements OnInit {
   }
 
   handleAction(event: { key: string; item: any }) {
-    this.idExpense = event.item._id;
+    this.idExpense = event.item.id;
 
     if (event.key === 'detalle') {
       this.openModal('view', event.item);
@@ -148,6 +149,7 @@ export class ListComponent implements OnInit {
 
   saveExpense(expense: any) {
     this.expenses = expense;
+    console.log('expenses',this.expenses)
 
     this.expenseWithBudget = {
       ...expense,

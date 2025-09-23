@@ -3,7 +3,7 @@ export class Expense {
   nombre: string;
   descripcion?: string;
   valor: number;
-  presupuestoId: string;
+  presupuestoId: string;  
   userId: string;
   createdAt?: Date;
   updatedAt?: Date;

@@ -12,7 +12,7 @@ import { BudgetResponse, Budget } from '../../models/budget/budget';
 })
 export class BudgetService {
 
-  private apiUrl = environment.apiUrl+'/budgets';
+  private apiUrl = environment.apiUrl+'/budget';
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class BudgetService {
 
   createBudget(budget: Budget): Observable<{ message: string; budget: Budget }> {
     return this.http.post<{ message: string; budget: Budget }>(
-      `${this.apiUrl}/create`,
+      `${this.apiUrl}`,
       budget
     );
   }

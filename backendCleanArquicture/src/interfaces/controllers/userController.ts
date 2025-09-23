@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "../application/use-cases/createUserUseCase";
-import { MongoUserRepository } from "../infrastructure/repositories/MongoUserRepository";
-import { LoginUserUseCase } from "../application/use-cases/LoginUserUseCase";
+import { MongoUserRepository } from "../../infrastructure/repositories/MongoUserRepository";
+import { CreateUserUseCase } from "../../application/use-cases/user/createUserUseCase";
+import { LoginUserUseCase } from "../../application/use-cases/user/LoginUserUseCase";
+import { ChangePasswordUseCase } from "../../application/use-cases/user/ChangePasswordUseCase";
  
 const userRepository = new MongoUserRepository();
 const loginUserUseCase = new LoginUserUseCase(userRepository);
 
 const createUserUseCase = new CreateUserUseCase(userRepository);
+const changePasswordUseCase = new ChangePasswordUseCase(userRepository);
+
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -28,6 +31,24 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const { password: _, ...userWithoutPassword } = user;
 
     res.json({ message: "Login exitoso", token, user: userWithoutPassword });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const changePassword = async (req: Request & { userId?: string }, res: Response) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const userId = req.userId; // viene del middleware de auth
+
+    if (!userId) {
+      res.status(401).json({ message: "No autorizado" });
+      return;
+    }
+
+    await changePasswordUseCase.execute(userId, currentPassword, newPassword);
+
+    res.json({ message: "Contraseña actualizada correctamente" });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     const user = localStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
-      this.nombreUsuario = userData.nombre || 'Usuario';
+      this.nombreUsuario = userData.name || 'Usuario';
       this.email = userData.email || '';
     } else {
       console.log('No se encontró usuario en localStorage');

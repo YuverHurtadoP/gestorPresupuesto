@@ -1,24 +1,22 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export interface IBudgetDocument extends Document {
   nombre: string;
   descripcion?: string;
   valor: number;
-  user: Types.ObjectId;
-  createdAt?: Date;
-  updatedAt?: Date;
+  userId: Types.ObjectId;   
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const BudgetSchema: Schema = new Schema(
+const BudgetSchema = new Schema<IBudgetDocument>(
   {
-    nombre: { type: String, required: true, trim: true },
-    descripcion: { type: String, default: "", trim: true },
-    valor: { type: Number, required: true, min: 0 },
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    nombre: { type: String, required: true },
+    descripcion: { type: String },
+    valor: { type: Number, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true }, // 👈 correcto
   },
   { timestamps: true }
 );
 
-const BudgetModel = mongoose.model<IBudgetDocument>("Budget", BudgetSchema);
-
-export default BudgetModel;
+export default model<IBudgetDocument>("Budget", BudgetSchema);

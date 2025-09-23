@@ -1,11 +1,11 @@
 export interface UserRegister {
-  nombre: string;
+  name: string;
   email: string;
   password: string;
 }
 
 export interface UserLogin {
-  nombre: string;
+  name: string;
   email: string;
 
 }

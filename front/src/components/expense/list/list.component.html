@@ -17,19 +17,19 @@
     <p>
       <strong>Presupuesto:</strong>
       <span class="text-orange-500 font-bold">
-        {{ resumen.presupuesto | currency:'USD' }}
+        {{ resumen?.presupuesto | currency:'USD' }}
       </span>
     </p>
     <p>
       <strong>Disponible:</strong>
       <span class="text-orange-500 font-bold">
-        {{ resumen.disponible | currency:'USD' }}
+        {{ resumen?.disponible | currency:'USD' }}
       </span>
     </p>
     <p>
       <strong>Gastado:</strong>
       <span class="text-orange-500 font-bold">
-        {{ resumen.gastado | currency:'USD' }}
+        {{ resumen?.gastado | currency:'USD' }}
       </span>
     </p>
   </div>

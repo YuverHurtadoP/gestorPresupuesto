@@ -48,8 +48,8 @@ export class ListComponent implements OnInit {
  loadBudgets() {
   this.budgetService.getBudgets(this.page, this.limit).subscribe((res) => {
     this.presupuestos = res.budgets.map(b => ({
-      ...b, // conserva todos los campos originales
-      link: `${this.link}${b._id}` // agrega la ruta clicable
+      ...b,
+      link: `${this.link}${b.id}`
     }));
     this.total = res.total;
     this.totalPages = Math.ceil(this.total / this.limit);
@@ -67,7 +67,7 @@ export class ListComponent implements OnInit {
 
 
   handleAction(event: { key: string, item: any }) {
-    this.idPresupuesto = event.item._id;
+    this.idPresupuesto = event.item.id;
     this.link = event.item.link;
     console.log('Acción:', event.key, 'en presupuesto:', event.item);
 

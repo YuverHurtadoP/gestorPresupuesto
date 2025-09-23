@@ -1,6 +1,7 @@
-import { User } from "../../domain/entities/User";
-import { IUserRepository } from "../../domain/repositories/IUserRepositor";
+
 import bcrypt from "bcrypt";
+import { User } from "../../../domain/entities/User";
+import { IUserRepository } from "../../../domain/repositories/IUserRepositor";
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) { }
 
