@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon src/index.ts",
-      "test": "echo \"No tests defined yet\""
+    "test": "echo \"No tests defined yet\"",
+      "build": "tsc"
   },
   "keywords": [],
   "author": "",
