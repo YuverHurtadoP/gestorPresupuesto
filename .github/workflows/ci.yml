@@ -15,6 +15,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Trae todos los archivos
+
+      - name: Ensure backend folder is not empty
+        run: |
+          if [ ! -f placeholder.txt ]; then
+            echo "Placeholder file to ensure folder exists" > placeholder.txt
+          fi
+
+      - name: Debug backend folder
+        run: ls -la
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -38,6 +49,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Ensure frontend folder is not empty
+        run: |
+          if [ ! -f placeholder.txt ]; then
+            echo "Placeholder file to ensure folder exists" > placeholder.txt
+          fi
+
+      - name: Debug frontend folder
+        run: ls -la
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
