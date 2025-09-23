@@ -23,7 +23,7 @@ jobs:
           echo "backendCleanArquitecture contents:"
           ls -la backendCleanArquitecture
           echo "package.json content:"
-          cat backendCleanArquitecture/package.json
+          cat backendCleanArquicture/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -32,17 +32,17 @@ jobs:
 
       - name: Install backend dependencies
         run: |
-          cd backendCleanArquitecture
+          cd backendCleanArquicture
           npm install --force
 
       - name: Run backend tests
         run: |
-          cd backendCleanArquitecture
+          cd backendCleanArquicture
           npm test
 
       - name: Build backend
         run: |
-          cd backendCleanArquitecture
+          cd backendCleanArquicture
           npm run build
 
   build-frontend:
