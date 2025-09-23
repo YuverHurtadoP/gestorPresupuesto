@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backendCleanArquitecture
+        working-directory: backendCleanArquitecture
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./front
+        working-directory: front
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
