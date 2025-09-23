@@ -1,0 +1,52 @@
+src/
+ ├── app/                      # Configuración mínima de arranque
+ │   └── app-routing.module.ts # Rutas principales de la aplicación
+ │
+ ├── core/                     # Core = cosas globales de la app (1 sola vez)
+ │   ├── guards/               # Route guards (auth, roles, etc.)
+ │   ├── interceptors/         # HTTP interceptors (tokens, errores)
+ │   ├── services/             # Servicios globales (ej: AuthService global)
+ │   ├── models/               # Interfaces compartidas
+ │   ├── utils/                # Helpers/utilidades globales
+ │   └── config/               # Configuración global (endpoints, env, etc.)
+ │
+ ├── shared/                   # Elementos reutilizables
+ │   ├── components/           # Botones, modales, tablas genéricas
+ │   ├── directives/           # Directivas reutilizables
+ │   ├── pipes/                # Pipes/filtros reutilizables
+ │   └── styles/               # SCSS/Tailwind config
+ │
+ ├── features/                 # Cada módulo de negocio (DDD style)
+ │   ├── auth/
+ │   │   ├── components/       # Componentes pequeños (LoginForm, etc.)
+ │   │   ├── pages/            # Páginas completas (LoginPage, RegisterPage)
+ │   │   ├── services/         # Servicios propios del feature (AuthApiService)
+ │   │   ├── store/            # Estado (NgRx, Redux, Pinia)
+ │   │   ├── models/           # Interfaces específicas de Auth
+ │   │   └── auth.module.ts    # Módulo del feature (Angular)
+ │   │
+ │   ├── budget/
+ │   │   ├── components/       # BudgetCard, BudgetForm, etc.
+ │   │   ├── pages/            # BudgetListPage, BudgetDetailPage
+ │   │   ├── services/         # BudgetApiService, BudgetFacade
+ │   │   ├── store/            # Estado de budgets
+ │   │   ├── models/           # Budget, CreateBudgetDto, etc.
+ │   │   └── budget.module.ts
+ │   │
+ │   └── expenses/
+ │       ├── components/       # ExpenseCard, ExpenseForm
+ │       ├── pages/            # ExpensesListPage, ExpenseDetailPage
+ │       ├── services/         # ExpenseApiService, ExpenseFacade
+ │       ├── store/            # Estado de expenses
+ │       ├── models/           # Expense, ExpenseDto
+ │       └── expenses.module.ts
+ │
+ ├── assets/                   # Imágenes, íconos, fuentes
+ │
+ ├── environments/             # Configuración de entornos (dev, prod)
+ │
+ └── main.ts / main.tsx        # Punto de entrada de la app
+
+
+
+Feature-based-architecture o Modular architecture
