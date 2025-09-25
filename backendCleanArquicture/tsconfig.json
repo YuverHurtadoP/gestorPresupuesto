@@ -1,15 +1,15 @@
+ 
 {
-  "compilerOptions": {
-    "outDir": "./dist",
+"compilerOptions": {
+    "outDir": "./dir",
     "rootDir": "./src",
-    "lib": ["ES2020"],
-    "target": "ES2020",
-    "module": "CommonJS",
-    "strict": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "sourceMap": true
-  },
-  "include": ["src/**/*.ts"]
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "moduleResolution": "nodeNext",
+    "module": "NodeNext",
+    "strict": false,
+    "sourceMap": true,
+    "esModuleInterop": true
+},
+"include": ["src/**/*.ts"]
 }
