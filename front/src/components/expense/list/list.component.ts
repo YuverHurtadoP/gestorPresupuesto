@@ -8,7 +8,6 @@ import { PaginationComponent } from '../../common/pagination/pagination.componen
 import { FormComponent } from '../../budgets/form/form.component';
 import { Notyf } from 'notyf';
 import Swal from 'sweetalert2';
-import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-list',
@@ -34,9 +33,6 @@ export class ListComponent implements OnInit {
   idExpense = '';
   resumen: any;
   porcentaje: number = 0;
-
-  doughnutData!: ChartData<'doughnut'>;
-  detalleData!: ChartData<'pie'>;
 
   modalVisible = false;
   modalMode: 'create' | 'edit' | 'view' = 'create';
