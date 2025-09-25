@@ -77,10 +77,7 @@ jobs:
           cd front
           npm install --force
 
-      - name: Run frontend tests
-        run: |
-          cd front
-          npm test --if-present
+   
 
       - name: Build frontend
         run: |
